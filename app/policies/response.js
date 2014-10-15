@@ -16,7 +16,7 @@ var ApiResponse = function(res) {
 	this.send = function(err) {
 		var status = 200;
 		var body = null;
-		if(!valid) {
+		if(!this.valid) {
 			if(_.isObject(this.error)) {
 				if(this.error.hasOwnProperty('status')) {
 					status = this.error.status;
