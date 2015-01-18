@@ -1,0 +1,24 @@
+{
+  "name": "orion-api",
+  "version": "1.0.0",
+  "description": "Api plugin for orion-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alarner/orion-api.git"
+  },
+  "keywords": [
+    "api",
+    "orion",
+    "server"
+  ],
+  "author": "Aaron Larner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alarner/orion-api/issues"
+  },
+  "homepage": "https://github.com/alarner/orion-api"
+}
