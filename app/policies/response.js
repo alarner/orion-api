@@ -5,6 +5,7 @@ var ApiResponse = function(res) {
 	this.error = null;
 	this.errorStatus = 500;
 	this.data = {};
+	this.metadata = {};
 	this.setError = function(err, status) {
 		this.valid = false;
 		this.error = err;
@@ -15,23 +16,30 @@ var ApiResponse = function(res) {
 		this.data = data;
 		return this;
 	};
+	this.setMetadata = function(metadata) {
+		_.merge(this.metadata, metadata);
+	};
 	this.send = function(err) {
 		var status = 200;
 		var body = null;
+		var bodyObj = {
+			metadata: this.metadata
+		};
 		if(!this.valid) {
 			status = this.errorStatus;
 			if(_.isObject(this.error)) {
-				body = JSON.stringify({error: this.error});
+				bodyObj.error = this.error;
 			}
 			else {
-				body = JSON.stringify({error: {message: this.error}});
+				bodyObj.error = {message: this.error};
 			}
 		}
 		else {
-			body = JSON.stringify({
-				data: this.data
-			});
+			bodyObj.data = this.data;
 		}
+
+		body = JSON.stringify(bodyObj);
+
 		res.writeHead(status, {
 			'Content-Length': body.length,
 			'Content-Type': 'text/json'
