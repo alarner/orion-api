@@ -3,10 +3,12 @@ var ApiResponse = function(res) {
 	this.valid = true;
 	this.res = res;
 	this.error = null;
+	this.errorStatus = 500;
 	this.data = {};
-	this.setError = function(err) {
+	this.setError = function(err, status) {
 		this.valid = false;
 		this.error = err;
+		if(status) this.errorStatus = status;
 		return this;
 	};
 	this.setData = function(data) {
@@ -17,15 +19,12 @@ var ApiResponse = function(res) {
 		var status = 200;
 		var body = null;
 		if(!this.valid) {
+			status = this.errorStatus;
 			if(_.isObject(this.error)) {
-				if(this.error.hasOwnProperty('status')) {
-					status = this.error.status;
-				}
-				body = JSON.stringify(this.error);
+				body = JSON.stringify({error: this.error});
 			}
 			else {
-				status = 500;
-				body = this.error;
+				body = JSON.stringify({error: {message: this.error}});
 			}
 		}
 		else {

@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/alarner/orion-api/issues"
   },
-  "homepage": "https://github.com/alarner/orion-api"
+  "homepage": "https://github.com/alarner/orion-api",
+  "dependencies": {
+    "lodash": "^2.4.1"
+  }
 }
